@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email = "weverton@wolcan.us"
   s.homepage = "http://github.com/wolcanus/simple-captcha"
 
-  s.add_dependency("mongoid", ["~> 2.3.4"])
+  s.add_dependency("mongoid", ["~> 3.0.0"])
   
   s.files = Dir["{lib}/**/*"] + ["Rakefile", "README.rdoc"]
   s.test_files = Dir["{test}/**/*"]
