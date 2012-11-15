@@ -1,5 +1,7 @@
 =SimpleCaptcha
 
+This is a fork of wolcanus's fork of SimpleCaptcha to support Mongoid 3 and new formtastic.
+
 This is a fork of galetahub SimpleCaptcha to support Mongoid.
 Its implementation requires
 adding up a single line in views and in controllers/models.
@@ -25,11 +27,11 @@ backward compatibility with previous versions of Rails.
 
 ==Installation
 
-  gem "wolcanus-simple_captcha", :require => "simple_captcha"
+  gem "glebtv-simple_captcha", :require => "simple_captcha"
 
 or
 
-  gem 'wolcanus-simple_captcha', :require => 'simple_captcha', :git => 'git://github.com/wolcanus/simple-captcha.git'
+  gem 'glebtv-simple_captcha', :require => 'simple_captcha', :git => 'git://github.com/glebtv/simple-captcha.git'
 
 ==Setup
 
