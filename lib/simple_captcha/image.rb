@@ -32,6 +32,10 @@ module SimpleCaptcha #:nodoc
         @@image_styles[style]
       end
 
+      def image_params_from_color(color)
+        ["-alpha set -background none -fill \"#{color}\""]
+      end
+
       def distortion(key='low')
         key =
           key == 'random' ?
@@ -59,26 +63,39 @@ module SimpleCaptcha #:nodoc
 
       def generate_simple_captcha_image(simple_captcha_key) #:nodoc
         amplitude, frequency = ImageHelpers.distortion(SimpleCaptcha.distortion)
-        text = Utils::simple_captcha_value(simple_captcha_key)
+        text = Utils::simple_captcha_new_value(simple_captcha_key)
+        if SimpleCaptcha.image_color.nil?
+          params = ImageHelpers.image_params(SimpleCaptcha.image_style).dup
+        else
+          params = ImageHelpers.image_params_from_color(SimpleCaptcha.image_color).dup
+        end
 
-        params = ImageHelpers.image_params(SimpleCaptcha.image_style).dup
-        params << "-size #{SimpleCaptcha.image_size}"
-        params << "-wave #{amplitude}x#{frequency}"
-        params << "-gravity 'Center'"
-        params << "-pointsize 22"
-        params << "-implode 0.2"
-
-        dst = RUBY_VERSION < '1.9' ? Tempfile.new('simple_captcha.jpg') : Tempfile.new(['simple_captcha', '.jpg'])
+        params << "-size #{SimpleCaptcha.image_size} xc:transparent"
+        params << "-gravity \"Center\""
+        if params.join(' ').index('-pointsize').nil?
+          params << "-pointsize #{SimpleCaptcha.pointsize}"
+        end
+        dst = Tempfile.new(RUBY_VERSION < '1.9' ? 'simple_captcha.png' : ['simple_captcha', '.png'], SimpleCaptcha.tmp_path)
         dst.binmode
+        text.split(//).each_with_index do |letter, index|
+          i = -60 + (index*25) + rand(-6..6)
+          params << "-draw \"translate #{i},#{rand(-6..6)} skewX #{rand(-15..15)} gravity center text 0,0 '#{letter}'\" "
+        end
 
-        params << "label:#{text} '#{File.expand_path(dst.path)}'"
+        params << "-wave #{amplitude}x#{frequency}"
 
+        (1..10).each do |i|
+          params << "-draw \"polyline #{rand(160)},#{rand(61)} #{rand(160)},#{rand(62)}\""
+        end
+
+        params << "\"#{File.expand_path(dst.path)}\""
+        # puts "convert " + params.join(' ')
         SimpleCaptcha::Utils::run("convert", params.join(' '))
 
         dst.close
 
         File.expand_path(dst.path)
-        #dst
+                                                            #dst
       end
   end
 end
