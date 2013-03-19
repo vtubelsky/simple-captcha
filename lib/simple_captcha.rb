@@ -1,36 +1,39 @@
 # encoding: utf-8
 
 module SimpleCaptcha
-  autoload :Utils,             'simple_captcha/utils'
+  autoload :Utils,             File.dirname(__FILE__) + '/simple_captcha/utils'
 
-  autoload :ImageHelpers,      'simple_captcha/image'
-  autoload :ViewHelper,        'simple_captcha/view'
-  autoload :ControllerHelpers, 'simple_captcha/controller'
+  autoload :ImageHelpers,      File.dirname(__FILE__) + '/simple_captcha/image'
+  autoload :ViewHelper,        File.dirname(__FILE__) + '/simple_captcha/view'
+  autoload :ControllerHelpers, File.dirname(__FILE__) + '/simple_captcha/controller'
 
-  autoload :FormBuilder,       'simple_captcha/hooks/form_builder'
+  autoload :FormBuilder,       File.dirname(__FILE__) + '/simple_captcha/hooks/form_builder'
 
-  if Object.const_defined?("Formtastic")
-    require "simple_captcha/hooks/formtastic"
+  if Object.const_defined?('Formtastic')
+    require File.dirname(__FILE__) + '/simple_captcha/hooks/formtastic'
   end
 
-  if Object.const_defined?("SimpleForm")
-    require "simple_captcha/hooks/simple_form"
+  if Object.const_defined?('SimpleForm')
+    require File.dirname(__FILE__) + '/simple_captcha/hooks/simple_form'
   end
 
-  if Object.const_defined?("Mongoid")
-    autoload :SimpleCaptchaData, 'simple_captcha/storage/mongoid'
+  if Object.const_defined?('Mongoid')
+    autoload :SimpleCaptchaData, File.dirname(__FILE__) + '/simple_captcha/storage/mongoid'
   else
-    autoload :SimpleCaptchaData, 'simple_captcha/storage/active_record'
-    autoload :ModelHelpers,      'simple_captcha/active_record'
+    autoload :SimpleCaptchaData, File.dirname(__FILE__) + '/simple_captcha/storage/active_record'
+    autoload :ModelHelpers,      File.dirname(__FILE__) + '/simple_captcha/active_record'
   end
 
-  autoload :Middleware,        'simple_captcha/middleware'
+  autoload :Middleware,        File.dirname(__FILE__) + '/simple_captcha/middleware'
 
   mattr_accessor :image_size
-  @@image_size = "100x28"
+  @@image_size = "130x40"
 
   mattr_accessor :length
   @@length = 5
+
+  mattr_accessor :charset
+  @@charset = '23456789abcdefghkmnpqrstwxyz'
 
   # 'embosed_silver',
   # 'simply_red',

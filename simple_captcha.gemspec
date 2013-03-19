@@ -16,4 +16,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir["{test}/**/*"]
   s.extra_rdoc_files = %w(README.rdoc)
   s.require_paths = %w(lib)
+
+  s.add_development_dependency("activesupport", ["~> 3.2"])
 end

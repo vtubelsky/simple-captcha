@@ -24,17 +24,19 @@ module SimpleCaptcha #:nodoc
       SimpleCaptchaData.get_data(key).value rescue nil
     end
 
+    def self.random_str()
+      charset = SimpleCaptcha.charset.split(//)
+      size = SimpleCaptcha.length
+
+      (0...size).map{ charset.to_a[rand(charset.size)] }.join
+    end
+
     def self.simple_captcha_new_value(key) #:nodoc
       begin
-        # very unsafe to display same code over and over
-        value = ''
-        # SimpleCaptcha.length.times{value << (48 + rand(10)).chr}
-
-        SimpleCaptcha.length.times{value << (65 + rand(26)).chr}
         d = SimpleCaptchaData.get_data(key)
-        d.value = value
+        d.value = self.random_str
         d.save!
-        value
+        d.value
       rescue
         nil
       end
