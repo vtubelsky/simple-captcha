@@ -21,9 +21,9 @@ module SimpleCaptcha
     autoload :SimpleCaptchaData, File.dirname(__FILE__) + '/simple_captcha/storage/mongoid'
   else
     autoload :SimpleCaptchaData, File.dirname(__FILE__) + '/simple_captcha/storage/active_record'
-    autoload :ModelHelpers,      File.dirname(__FILE__) + '/simple_captcha/active_record'
   end
-
+  
+  autoload :ModelHelpers,      File.dirname(__FILE__) + '/simple_captcha/model_helpers'
   autoload :Middleware,        File.dirname(__FILE__) + '/simple_captcha/middleware'
 
   mattr_accessor :image_size
