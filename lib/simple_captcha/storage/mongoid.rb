@@ -1,5 +1,6 @@
 module SimpleCaptcha
   class SimpleCaptchaData
+    store_in collection: "simple_captcha_data"
     include Mongoid::Document
     include Mongoid::Timestamps
     
