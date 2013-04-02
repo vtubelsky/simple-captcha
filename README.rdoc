@@ -35,11 +35,11 @@ in your model, besides usual AR instructions
 
 ==Installation
 
-  gem "glebtv-simple_captcha", :require => "simple_captcha"
+  gem "glebtv-simple_captcha"
 
 or
 
-  gem 'glebtv-simple_captcha', :require => 'simple_captcha', :git => 'git://github.com/glebtv/simple-captcha.git'
+  gem 'glebtv-simple_captcha', github: 'glebtv/simple-captcha'
 
 ==Setup
 
