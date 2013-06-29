@@ -8,6 +8,30 @@ adding up a single line in views and in controllers/models.
 SimpleCaptcha is available to be used with Rails 3 or above and also it provides the
 backward compatibility with previous versions of Rails.
 
+== Rails 4 and strong parameters
+
+Should work like so:
+  
+    class ContactsController < ApplicationController
+      def create
+        @contact_message = ContactMessage.new(message_params)
+
+        if @contact_message.save_with_captcha
+          redirect_to :contacts_sent
+        else
+          if @contact_message.errors.any?
+            flash.now[:alert] = @contact_message.errors.full_messages.join("\n")
+          end
+          render action: "new"
+        end
+      end
+
+      private
+      def message_params
+        params.require(:contact_message).permit(:name, :email, :content, :captcha, :captcha_key)
+      end
+    end
+
 == For mongoid support
 
 Just do
