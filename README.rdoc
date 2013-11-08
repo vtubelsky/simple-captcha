@@ -1,5 +1,7 @@
 =SimpleCaptcha
 
+=== For formtastic or simple form: put this gem AFTER THEM in Gemfile!
+
 This is a fork of wolcanus's fork of SimpleCaptcha to support Mongoid 3 and new formtastic.
 
 This is a fork of galetahub SimpleCaptcha to support Mongoid.

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.summary = "A fork of a fork of a fork of simple_captcha."
   s.description = "."
   s.authors = ["GlebTv"]
-  s.email = "i@gleb.tv"
+  s.email = "glebtv@gmail.com"
   s.homepage = "http://github.com/glebtv/simple-captcha"
 
   s.files = Dir["{lib}/**/*"] + %w(Rakefile README.rdoc)

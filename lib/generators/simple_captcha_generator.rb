@@ -2,7 +2,7 @@ require 'rails/generators'
 
 class SimpleCaptchaGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
-                          
+
   def self.source_root
     @source_root ||= File.expand_path(File.join(File.dirname(__FILE__), 'templates/'))
   end
