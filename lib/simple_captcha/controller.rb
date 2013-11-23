@@ -18,7 +18,7 @@ module SimpleCaptcha #:nodoc
       
       if params[:captcha]
         data = SimpleCaptcha::Utils::simple_captcha_value(session[:captcha])
-        result = data == params[:captcha].delete(" ").upcase
+        result = (!data.nil? && data.upcase == params[:captcha].delete(" ").upcase)
         SimpleCaptcha::Utils::simple_captcha_passed!(session[:captcha]) if result
         return result
       else
