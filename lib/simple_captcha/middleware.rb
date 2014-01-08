@@ -47,7 +47,7 @@ module SimpleCaptcha
 
         status = options[:status] || 200
         headers = {"Content-Disposition" => "#{options[:disposition]}; filename='#{options[:filename]}'", "Content-Type" => options[:type], 'Content-Transfer-Encoding' => 'binary', 'Cache-Control' => 'private'}
-        response_body = [File.open(path, "rb").read]
+        response_body = [File.open(path, "rb") { |f| f.read }]
         File.delete(path)
         
         [status, headers, response_body]
