@@ -3,14 +3,14 @@ $:.push File.expand_path("../lib", __FILE__)
 require "simple_captcha/version"
 
 Gem::Specification.new do |s|
-  s.name = "glebtv-simple_captcha"
+  s.name = "vtubelsky-simple_captcha"
   s.version = SimpleCaptcha::VERSION.dup
   s.platform = Gem::Platform::RUBY
   s.summary = "A fork of a fork of a fork of simple_captcha."
   s.description = "."
-  s.authors = ["GlebTv"]
-  s.email = "glebtv@gmail.com"
-  s.homepage = "http://github.com/glebtv/simple-captcha"
+  s.authors = ["vtubelsky"]
+  s.email = "vv@samopal.com"
+  s.homepage = "http://github.com/vtubelsky/simple-captcha"
 
   s.files = Dir["{lib}/**/*"] + %w(Rakefile README.rdoc)
   s.test_files = Dir["{test}/**/*"]
