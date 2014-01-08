@@ -1,6 +1,6 @@
 =SimpleCaptcha
 
-=== For formtastic or simple form: put this gem AFTER THEM in Gemfile!
+This is a fork of glebtv SimpleCaptcha to make a bug fix.
 
 This is a fork of wolcanus's fork of SimpleCaptcha to support Mongoid 3 and new formtastic.
 
@@ -61,11 +61,11 @@ in your model, besides usual AR instructions
 
 ==Installation
 
-  gem "glebtv-simple_captcha"
+  gem "vtubelsky-simple_captcha"
 
 or
 
-  gem 'glebtv-simple_captcha', github: 'glebtv/simple-captcha'
+  gem 'vtubelsky-simple_captcha', github: 'vtubelsky/simple-captcha'
 
 ==Setup
 
