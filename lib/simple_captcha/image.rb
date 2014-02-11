@@ -71,17 +71,14 @@ module SimpleCaptcha #:nodoc
         end
 
         params << "-size #{SimpleCaptcha.image_size} xc:transparent"
-        params << "-gravity \"Center\""
-        psz = SimpleCaptcha.pointsize
-        if params.join(' ').index('-pointsize').nil?
-          params << "-pointsize #{psz}"
-        end
+        params << "-gravity center"
 
         dst = Tempfile.new(RUBY_VERSION < '1.9' ? 'simple_captcha.png' : ['simple_captcha', '.png'], SimpleCaptcha.tmp_path)
         dst.binmode
         text.split(//).each_with_index do |letter, index|
+          psz = rand(20..32)
           i = -(1.5  * psz) + (index * 0.75 * psz) + rand(-3..3)
-          params << "-draw \"translate #{i},#{rand(-3..3)} skewX #{rand(-15..15)} gravity center text 0,0 '#{letter}'\" "
+          params << "-pointsize #{psz} -draw \"translate #{i},#{rand(-5..5)} text 0,0 '#{letter}'\" "
         end
 
         params << "-wave #{amplitude}x#{frequency}"
@@ -91,7 +88,11 @@ module SimpleCaptcha #:nodoc
         end
 
         params << "\"#{File.expand_path(dst.path)}\""
-        # puts "convert " + params.join(' ')
+        
+        #puts "convert " + params.join(' ')        
+        #logfilename = "#{Rails.root}/log/simple_captcha.log"
+        #File.open(logfilename, 'a') {|f| f.write("convert " + params.join(' ') + "\n\n") }
+        
         SimpleCaptcha::Utils::run("convert", params.join(' '))
 
         dst.close
